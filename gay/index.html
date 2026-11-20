@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rsrsrsrsrs</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0ec21d, #000000);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.container {
+    background: rgb(196, 240, 182);
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px #0003;
+    width: 90%;
+    max-width: 500px;
+}
+
+h1 { color: #030303; }
+
+p {
+    color: #444;
+    font-size: 18px;
+}
+
+img {
+    width: 250px;
+    max-width: 100%;
+    border-radius: 15px;
+    margin: 15px 0;
+}
+
+.area-botao {
+    position: relative;
+    height: 130px;
+    margin-top: 20px;
+}
+
+button {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    background: #000000;
+    color: white;
+    border: none;
+    padding: 15px 22px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.surpresa {
+    display: none;
+    background: linear-gradient(135deg, #5bcf3e, #000000);
+    min-height: 100vh;
+    width: 100%;
+    padding: 25px 10px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.surpresa .container {
+    max-width: 600px;
+    padding: 35px 20px;
+}
+
+.surpresa h1 { color: #000000; }
+
+.surpresa img {
+    width: 280px;
+    max-width: 100%;
+}
+
+.confete {
+    position: fixed;
+    top: -20px;
+    z-index: 10;
+    pointer-events: none;
+    animation: cair linear forwards;
+}
+
+@keyframes cair {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="primeiraPagina">
+
+    <h1>boa noite erickita</h1>
+
+    <p>
+      
+    </p>
+
+    <img src="https://i.pinimg.com/236x/90/7d/80/907d808fa518a8c42fee9ebb18258a30.jpg"
+         alt="Festa colorida">
+
+    <p id="contador">clica no botão</p>
+
+    <div class="area-botao" id="area">
+        <button id="botao">rsrsrsrsrs</button>
+    </div>
+
+</div>
+
+<div class="surpresa" id="segundaPagina">
+
+    <div class="container">
+
+        <h1>uhuhhhuhuhuhuh</h1>
+
+        <p>
+         
+        </p>
+
+        <img src="https://i.pinimg.com/736x/ba/3f/98/ba3f98039aa3e624812ca881b321cb2a.jpg"
+             alt="Celebração">
+
+        <h2 style="color:#000000;">eita bbs</h2>
+
+        <p>
+            agora olha essas lesbians lindas
+        </p>
+
+        
+
+    </div>
+
+</div>
+
+<script>
+
+const botao = document.getElementById("botao");
+const area = document.getElementById("area");
+const contador = document.getElementById("contador");
+
+let fugas = 0;
+const limite = 10;
+
+function fugir() {
+
+    if (fugas >= limite) return;
+
+    fugas++;
+
+    if (fugas === limite) {
+        contador.innerText =
+            "parei, vai";
+
+        // NOVO NOME DO BOTÃO
+        botao.innerText = "agora vai, prometo";
+
+        botao.style.left = "50%";
+        botao.style.top = "20px";
+        botao.style.transform = "translateX(-50%)";
+
+        botao.onclick = abrirSurpresa;
+        return;
+    }
+
+    contador.innerText =
+        "eita" + fugas + " de novo";
+
+    const maxX = Math.max(0, area.clientWidth - botao.offsetWidth);
+    const maxY = Math.max(0, area.clientHeight - botao.offsetHeight);
+
+    botao.style.transform = "none";
+    botao.style.left = Math.random() * maxX + "px";
+    botao.style.top = Math.random() * maxY + "px";
+}
+
+function abrirSurpresa() {
+
+    const novaPagina = window.open("", "_blank");
+
+    if (!novaPagina) {
+        alert("Permita a abertura de pop-ups no navegador!");
+        return;
+    }
+
+    novaPagina.document.open();
+    novaPagina.document.write(document.documentElement.outerHTML);
+    novaPagina.document.close();
+
+    novaPagina.onload = function() {
+
+        novaPagina.document.getElementById("primeiraPagina").style.display = "none";
+
+        novaPagina.document.getElementById("segundaPagina").style.display = "flex";
+
+        const cores = [
+            "#ff0000", "#ffcc00", "#00ccff",
+            "#ff69b4", "#7b2cbf", "#00cc66",
+            "#ff8800"
+        ];
+
+        function criarConfete() {
+
+            const confete = novaPagina.document.createElement("div");
+
+            confete.className = "confete";
+            confete.style.left = Math.random() * 100 + "vw";
+            confete.style.backgroundColor =
+                cores[Math.floor(Math.random() * cores.length)];
+
+            confete.style.width = (6 + Math.random() * 10) + "px";
+            confete.style.height = (8 + Math.random() * 12) + "px";
+            confete.style.animationDuration =
+                (2 + Math.random() * 4) + "s";
+
+            novaPagina.document.body.appendChild(confete);
+
+            setTimeout(() => confete.remove(), 6000);
+        }
+
+        for (let i = 0; i < 100; i++) {
+            setTimeout(criarConfete, i * 30);
+        }
+
+        setInterval(criarConfete, 100);
+    };
+}
+
+// COMPUTADOR
+botao.addEventListener("mouseenter", fugir);
+
+// CELULAR
+botao.addEventListener("touchstart", function(event) {
+    if (fugas < limite) {
+        event.preventDefault();
+        fugir();
+    }
+}, { passive: false });
+
+// CLIQUE FINAL
+botao.addEventListener("click", function(event) {
+    if (fugas < limite) {
+        event.preventDefault();
+        fugir();
+    }
+});
+
+</script>
+
+</body>
+</html>
